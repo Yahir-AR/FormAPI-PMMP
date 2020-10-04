@@ -15,7 +15,7 @@ $window->addButton("name1", "BedWars", new ButtonImage("path", "textures/items/b
 $window->showTo($player);
 ```
 
-![simple_form](https://imgur.com/gallery/cll2gnX)
+![alt text](https://i.imgur.com/xlEFsmc.jpeg)
 <br>
 For get the response from simple form, this is a event xD
 ```php
