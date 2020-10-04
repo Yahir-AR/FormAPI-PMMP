@@ -8,12 +8,6 @@ class ModalWindowForm extends WindowForm
 {
 
     /** @var String */
-    public $name = "";
-
-    /** @var String */
-    public $title = "";
-
-    /** @var String */
     public $description = "";
 
     /** @var String */
@@ -21,9 +15,6 @@ class ModalWindowForm extends WindowForm
 
     /** @var String */
     public $buttonFalse = "";
-
-    /** @var bool */
-    public $response;
 
     public function __construct(String $name, String $title, String $description, String $buttonTrue, String $buttonFalse)
     {

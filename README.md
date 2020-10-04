@@ -27,6 +27,11 @@ public function onResponse(PlayerWindowResponse $event){
 $player = $event->getPlayer();
 $form = $event->getForm();
 
+if($form->isClosed()) {
+$player->sendMessage("The form has been closed");
+return;
+}
+
 if(!($form instanceof SimpleWindowForm)) return;
 
 if($form->getName() !== "name") return;
@@ -56,6 +61,11 @@ public function onResponse(PlayerWindowResponse $event){
 $player = $event->getPlayer();
 $form = $event->getForm();
 
+if($form->isClosed()) {
+$player->sendMessage("The form has been closed");
+return;
+}
+
 if(!($form instanceof ModalWindowForm)) return;
 
 if($form->getName() !== "name") return;
@@ -67,3 +77,54 @@ $player->sendMessage("User cancel");
 }
 }
 ```
+
+# Example Custom Form
+For create a modal form
+```php
+use FormAPI\window\CustomWindowForm;
+
+$window = new CustomWindowForm("window_test", "Test", "This is a test");
+$window->addDropdown("users", "Select the users", ["ClembArcade", "RomnSD"]);
+$window->addInput("password", "Insert your password");
+$window->addSlider("age", "Select your age", 6, 20);
+$window->addToggle("notifications", "You want receive notifications?");
+$window->showTo($player);
+```
+
+<img src="https://i.imgur.com/EOoiG31.jpg" width="250" height="200"></img>
+
+<br>
+For get the response from modal form, this is a event xD
+
+```php
+use FormAPI\response\PlayerWindowResponse;
+use FormAPI\window\CustomWindowForm;
+
+public function onResponse(PlayerWindowResponse $event){
+$player = $event->getPlayer();
+$form = $event->getForm();
+
+if($form->isClosed()) {
+$player->sendMessage("The form has been closed");
+return;
+}
+
+if(!($form instanceof CustomWindowForm)) return;
+
+if($form->getName() !== "window_test") return;
+
+$user = $form->getElement("users");
+$password = $form->getElement("password");
+$age = $form->getElement("age");
+$noti = $form->getElement("notifications");
+
+$player->sendMessage($user->getName() . ": " . $user->getFinalValue());
+$player->sendMessage($password->getName() . ": " . $password->getFinalValue());
+$player->sendMessage($age->getName() . ": " . $age->getFinalValue());
+$player->sendMessage($noti->getName() . ": " . $noti->getFinalValue());
+
+}
+
+```
+
+<img src="https://i.imgur.com/AJUL8gg.jpg" width="250" height="75"></img>

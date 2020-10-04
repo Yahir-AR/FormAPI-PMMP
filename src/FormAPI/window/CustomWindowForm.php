@@ -4,7 +4,11 @@ namespace FormAPI\window;
 
 use FormAPI\elements\Dropdown;
 use FormAPI\elements\Element;
+use FormAPI\elements\ElementCustom;
 use FormAPI\elements\Input;
+use FormAPI\elements\Slider;
+use FormAPI\elements\StepSlider;
+use FormAPI\elements\Toggle;
 use FormAPI\Main;
 
 use pocketmine\Player;
@@ -12,17 +16,8 @@ use pocketmine\Player;
 class CustomWindowForm extends WindowForm
 {
 
-    /** @var String */
-    public $name = "";
-
-    /** @var String */
-    public $title = "";
-
-    /** @var Button[] */
+    /** @var ElementCustom[] */
     public $elements = [];
-
-    /** @var int */
-    public $response;
 
     public function __construct(string $name, string $title, string $description = "")
     {
@@ -39,12 +34,42 @@ class CustomWindowForm extends WindowForm
     }
 
     /**
-     * @param Element $element
+     * @param mixed $data
      */
-    public function addElement(Element $element): void
+    public function setResponse($data): void
     {
+        foreach($this->elements as $name => $element) {
+
+            if(isset($data[$element->getArrayIndex()]))
+                $element->setFinalData($data[$element->getArrayIndex()]);
+
+        }
+
+        parent::setResponse($data);
+    }
+
+    /**
+     * @param ElementCustom $element
+     */
+    private function addElement(ElementCustom $element): void
+    {
+        $index = count($this->content["content"]);
+
+        $element->setArrayIndex($index);
+
         $this->elements[$element->getName()] = $element;
-        $this->response["content"][] = $element->getContent();
+        $this->content["content"][$index] = $element->getContent();
+    }
+
+    /**
+     * @param String $name
+     * @return ElementCustom|null
+     */
+    public function getElement(String $name): ?ElementCustom
+    {
+        if(empty($this->elements[$name])) return null;
+
+        return $this->elements[$name];
     }
 
     /**
@@ -70,6 +95,40 @@ class CustomWindowForm extends WindowForm
     }
 
     /**
+     * @param String $name
+     * @param String $text
+     * @param int $min
+     * @param int $max
+     * @param int $step
+     * @param int $default
+     */
+    public function addSlider(String $name, String $text, int $min, int $max, int $step = -1, int $default = -1): void
+    {
+        $this->addElement(new Slider($this, $name, $text, $min, $max, $step, $default));
+    }
+
+    /**
+     * @param String $name
+     * @param String $text
+     * @param array $steps
+     * @param int $index
+     */
+    public function addStepSlider(String $name, String $text, array $steps, int $index = -1): void
+    {
+        $this->addElement(new StepSlider($this, $name, $text, $steps, $index));
+    }
+
+    /**
+     * @param String $name
+     * @param String $text
+     * @param bool $default
+     */
+    public function addToggle(String $name, String $text, bool $default = false): void
+    {
+        $this->addElement(new Toggle($this, $name, $text, $default));
+    }
+
+    /**
      * @param String $text
      */
     public function addLabel(String $text): void
@@ -79,5 +138,6 @@ class CustomWindowForm extends WindowForm
             "text" => $text
         ];
     }
+
 
 }

@@ -4,14 +4,8 @@ namespace FormAPI\elements;
 
 use FormAPI\window\WindowForm;
 
-class Dropdown implements Element
+class Dropdown extends ElementCustom
 {
-
-    /** @var String */
-    private $name = "";
-
-    /** @var String */
-    private $text = "";
 
     /** @var array */
     private $options = [];
@@ -19,17 +13,9 @@ class Dropdown implements Element
     /** @var int */
     private $default = 0;
 
-    /** @var WindowForm */
-    private $form = null;
-
-    private $content = [];
-
-
     public function __construct(WindowForm $form, String $name, String $text, array $options, int $default = 0)
     {
-        $this->form = $form;
-        $this->name = $name;
-        $this->text = $text;
+        parent::__construct($form, $name, $text);
         $this->options = $options;
         $this->default = $default;
 
@@ -39,22 +25,6 @@ class Dropdown implements Element
             "options" => $this->options,
             "default" => $this->default
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return String
-     */
-    public function getText(): string
-    {
-        return $this->text;
     }
 
     /**
@@ -73,19 +43,9 @@ class Dropdown implements Element
         return $this->default;
     }
 
-    /**
-     * @return WindowForm
-     */
-    public function getForm(): WindowForm
+    public function getFinalValue()
     {
-        return $this->form;
+        return $this->options[parent::getFinalValue()];
     }
 
-    /**
-     * @return array
-     */
-    public function getContent(): array
-    {
-        return $this->content;
-    }
 }

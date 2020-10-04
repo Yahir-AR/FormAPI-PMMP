@@ -2,37 +2,21 @@
 
 namespace FormAPI\response;
 
-use FormAPI\window\ModalWindowForm;
-use FormAPI\window\SimpleWindowForm;
+use FormAPI\window\CustomWindowForm;
 use FormAPI\window\WindowForm;
-use pocketmine\event\plugin\PluginEvent;
+use pocketmine\event\player\PlayerEvent;
 use pocketmine\Player;
 
-class PlayerWindowResponse extends PluginEvent
+class PlayerWindowResponse extends PlayerEvent
 {
-
-    /** @var Player */
-    private $player;
 
     /** @var WindowForm */
     private $form;
 
-    public function __construct(Player $player, $data, WindowForm $form)
+    public function __construct(Player $player, WindowForm $form)
     {
         $this->player = $player;
         $this->form = $form;
-
-        if($form instanceof SimpleWindowForm || $form instanceof ModalWindowForm)
-            $form->response = $data;
-
-    }
-
-    /**
-     * @return Player
-     */
-    public function getPlayer(): Player
-    {
-        return $this->player;
     }
 
     /**

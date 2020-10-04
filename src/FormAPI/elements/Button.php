@@ -5,28 +5,15 @@ namespace FormAPI\elements;
 use FormAPI\window\SimpleWindowForm;
 use FormAPI\window\WindowForm;
 
-class Button implements Element
+class Button extends Element
 {
-
-    /** @var String */
-    private $name = "";
-
-    /** @var String */
-    private $text = "";
-
-    /** @var WindowForm */
-    private $form = null;
 
     /** @var ButtonImage */
     private $image = null;
 
-    private $content = [];
-
     public function __construct(String $name, String $text, WindowForm $form, ButtonImage $image = null)
     {
-        $this->name = $name;
-        $this->text = $text;
-        $this->form = $form;
+        parent::__construct($form, $name, $text);
         $this->image = $image;
 
         $this->content = [
@@ -42,30 +29,6 @@ class Button implements Element
     }
 
     /**
-     * @return String
-     */
-    public function getName(): String
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return String
-     */
-    public function getText(): String
-    {
-        return $this->text;
-    }
-
-    /**
-     * @return WindowForm
-     */
-    public function getForm(): WindowForm
-    {
-        return $this->form;
-    }
-
-    /**
      * @return ButtonImage
      */
     public function getImage(): ?ButtonImage
@@ -73,11 +36,4 @@ class Button implements Element
         return $this->image;
     }
 
-    /**
-     * @return array
-     */
-    public function getContent(): array
-    {
-        return $this->content;
-    }
 }

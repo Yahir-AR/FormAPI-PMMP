@@ -10,11 +10,6 @@ use pocketmine\Player;
 class SimpleWindowForm extends WindowForm
 {
 
-    /** @var String */
-    public $name = "";
-
-    /** @var String */
-    public $title = "";
 
     /** @var String */
     public $description = "";
@@ -22,8 +17,6 @@ class SimpleWindowForm extends WindowForm
     /** @var Button[] */
     public $elements = [];
 
-    /** @var int */
-    public $response;
 
     public function __construct(String $name, String $title, String $description = "")
     {
