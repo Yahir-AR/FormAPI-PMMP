@@ -1,6 +1,6 @@
 <?php
 
-namespace NarutoKits\form\elements;
+namespace FormAPI\elements;
 
 class ButtonImage
 {
