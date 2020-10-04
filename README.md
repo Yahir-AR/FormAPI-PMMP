@@ -26,7 +26,7 @@ $form = $event->getForm();
 
 if(!($form instanceof SimpleWindowForm)) return;
 
-if(!($form->getName() !== "name")) return;
+if($form->getName() !== "name") return;
 
 $player->sendMessage($form->getClickedButton()->getText());
 }
