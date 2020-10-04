@@ -18,8 +18,8 @@ abstract class WindowForm implements Form
         if(isset($this->viewers[$player->getName()]))
             unset($this->viewers[$player->getName()]);
 
-        if($data == null) return;
-        
+        if($data === null) return;
+
         $player->getServer()->getPluginManager()->callEvent(new PlayerWindowResponse($player, $data, $this));
     }
 
