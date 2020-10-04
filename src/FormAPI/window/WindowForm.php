@@ -15,10 +15,12 @@ abstract class WindowForm implements Form
 
     public function handleResponse(Player $player, $data): void
     {
-        $player->getServer()->getPluginManager()->callEvent(new PlayerWindowResponse($player, $data, $this));
-
         if(isset($this->viewers[$player->getName()]))
             unset($this->viewers[$player->getName()]);
+
+        if($data == null) return;
+        
+        $player->getServer()->getPluginManager()->callEvent(new PlayerWindowResponse($player, $data, $this));
     }
 
     public function jsonSerialize()
