@@ -20,7 +20,10 @@ abstract class WindowForm implements Form
 
         if($data === null) return;
 
-        $player->getServer()->getPluginManager()->callEvent(new PlayerWindowResponse($player, $data, $this));
+        $ev = new PlayerWindowResponse($player, $data, $this);
+        if(!$ev->isCancelled()){
+            $ev->call();
+        }
     }
 
     public function jsonSerialize()
