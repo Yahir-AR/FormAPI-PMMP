@@ -1,8 +1,7 @@
 # FormAPI-PMMP
 Plugin to create easy forms for PocketMine-MP.
+<br>
 
-<br><br>
-**At the moment it only has a simple form and modal form, but with the passage of time I will implement the missing forms.**
 # Example Simple Form
 For create a simple form
 ```php
@@ -79,7 +78,7 @@ $player->sendMessage("User cancel");
 ```
 
 # Example Custom Form
-For create a modal form
+For create a custom form
 ```php
 use FormAPI\window\CustomWindowForm;
 
@@ -94,7 +93,7 @@ $window->showTo($player);
 <img src="https://i.imgur.com/EOoiG31.jpg" width="250" height="200"></img>
 
 <br>
-For get the response from modal form, this is a event xD
+For get the response from custom form, this is a event xD
 
 ```php
 use FormAPI\response\PlayerWindowResponse;
