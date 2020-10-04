@@ -79,6 +79,8 @@ class SimpleWindowForm extends WindowForm
     public function showTo(Player $player): void
     {
 
+        parent::showTo($player);
+
         foreach($this->elements as $name => $element) {
             $button = [
                 "text" => $element->getText()

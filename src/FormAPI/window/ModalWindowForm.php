@@ -85,8 +85,9 @@ class ModalWindowForm extends WindowForm
     /**
      * @param Player $player
      */
-    function showTo(Player $player): void
+    public function showTo(Player $player): void
     {
+        parent::showTo($player);
         $player->sendForm($this);
     }
 }

@@ -11,9 +11,14 @@ abstract class WindowForm implements Form
 
     public $content = [];
 
+    public $viewers = [];
+
     public function handleResponse(Player $player, $data): void
     {
         $player->getServer()->getPluginManager()->callEvent(new PlayerWindowResponse($player, $data, $this));
+
+        if(isset($this->viewers[$player->getName()]))
+            unset($this->viewers[$player->getName()]);
     }
 
     public function jsonSerialize()
@@ -31,5 +36,10 @@ abstract class WindowForm implements Form
         return $this->content;
     }
 
-    abstract function showTo(Player $player): void;
+    public function showTo(Player $player): void
+    {
+        if(isset($this->viewers[$player->getName()])) return;
+
+        $this->viewers[$player->getName()] = $this;
+    }
 }
