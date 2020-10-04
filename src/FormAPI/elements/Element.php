@@ -1,8 +1,8 @@
 <?php
 
-namespace NarutoKits\form\elements;
+namespace FormAPI\elements;
 
-use NarutoKits\form\WindowForm;
+use FormAPI\window\WindowForm;
 
 interface Element
 {
