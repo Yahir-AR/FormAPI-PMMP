@@ -2,6 +2,7 @@
 
 namespace FormAPI\response;
 
+use FormAPI\window\ModalWindowResponse;
 use FormAPI\window\SimpleWindowForm;
 use FormAPI\window\WindowForm;
 use pocketmine\event\plugin\PluginEvent;
@@ -21,7 +22,9 @@ class PlayerWindowResponse extends PluginEvent
         $this->player = $player;
         $this->form = $form;
 
-        if($form instanceof SimpleWindowForm) $form->response = $data;
+        if($form instanceof SimpleWindowForm || $form instanceof ModalWindowResponse)
+            $form->response = $data;
+
     }
 
     /**
