@@ -1,6 +1,8 @@
 # FormAPI-PMMP
 Plugin to create easy forms for PocketMine-MP.
 
+<br><br>
+**At the moment it only has a simple form, but with the passage of time I will implement the missing forms.**
 # Example
 For create a simple form
 ```
