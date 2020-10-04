@@ -26,14 +26,14 @@ public function onResponse(PlayerWindowResponse $event){
 $player = $event->getPlayer();
 $form = $event->getForm();
 
+if(!($form instanceof SimpleWindowForm)) return;
+
+if($form->getName() !== "name") return;
+
 if($form->isClosed()) {
 $player->sendMessage("The form has been closed");
 return;
 }
-
-if(!($form instanceof SimpleWindowForm)) return;
-
-if($form->getName() !== "name") return;
 
 $player->sendMessage($form->getClickedButton()->getText());
 }
@@ -60,14 +60,14 @@ public function onResponse(PlayerWindowResponse $event){
 $player = $event->getPlayer();
 $form = $event->getForm();
 
+if(!($form instanceof ModalWindowForm)) return;
+
+if($form->getName() !== "name") return;
+
 if($form->isClosed()) {
 $player->sendMessage("The form has been closed");
 return;
 }
-
-if(!($form instanceof ModalWindowForm)) return;
-
-if($form->getName() !== "name") return;
 
 if($form->isAccept()) {//responsexD
 $player->sendMessage("User accept");
@@ -103,14 +103,14 @@ public function onResponse(PlayerWindowResponse $event){
 $player = $event->getPlayer();
 $form = $event->getForm();
 
+if(!($form instanceof CustomWindowForm)) return;
+
+if($form->getName() !== "window_test") return;
+
 if($form->isClosed()) {
 $player->sendMessage("The form has been closed");
 return;
 }
-
-if(!($form instanceof CustomWindowForm)) return;
-
-if($form->getName() !== "window_test") return;
 
 $user = $form->getElement("users");
 $password = $form->getElement("password");
