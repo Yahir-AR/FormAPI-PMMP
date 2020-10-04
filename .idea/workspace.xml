@@ -21,7 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7697f77a-5b9f-406a-8820-cc5d1f7a0f5e" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/plugin.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FormAPI/Main.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/FormAPI/FormAPI.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/FormAPI/elements/Button.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/FormAPI/elements/ButtonImage.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/FormAPI/elements/Element.php" afterDir="false" />
@@ -71,7 +71,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1601787532177</updated>
-      <workItem from="1601787534212" duration="410000" />
+      <workItem from="1601787534212" duration="752000" />
     </task>
     <servers />
   </component>
