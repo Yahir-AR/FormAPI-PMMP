@@ -20,12 +20,25 @@ class Button implements Element
     /** @var ButtonImage */
     private $image = null;
 
+    private $content = [];
+
     public function __construct(String $name, String $text, WindowForm $form, ButtonImage $image = null)
     {
         $this->name = $name;
         $this->text = $text;
         $this->form = $form;
         $this->image = $image;
+
+        $this->content = [
+            "text" => $this->text
+        ];
+
+        if($this->image !== null) {
+            $this->content["image"] = [
+                "type" => $this->image->getType(),
+                "data" => $this->image->getLocation()
+            ];
+        }
     }
 
     /**
@@ -58,5 +71,13 @@ class Button implements Element
     public function getImage(): ?ButtonImage
     {
         return $this->image;
+    }
+
+    /**
+     * @return array
+     */
+    public function getContent(): array
+    {
+        return $this->content;
     }
 }

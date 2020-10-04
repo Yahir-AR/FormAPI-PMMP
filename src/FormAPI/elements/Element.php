@@ -10,4 +10,6 @@ interface Element
     public function getName(): String;
 
     public function getForm(): WindowForm;
+
+    public function getContent(): array;
 }

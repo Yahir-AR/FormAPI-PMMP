@@ -20,10 +20,7 @@ abstract class WindowForm implements Form
 
         if($data === null) return;
 
-        $ev = new PlayerWindowResponse($player, $data, $this);
-        if(!$ev->isCancelled()){
-            $ev->call();
-        }
+        (new PlayerWindowResponse($player, $data, $this))->call();
     }
 
     public function jsonSerialize()
@@ -46,5 +43,6 @@ abstract class WindowForm implements Form
         if(isset($this->viewers[$player->getName()])) return;
 
         $this->viewers[$player->getName()] = $this;
+        $player->sendForm($this);
     }
 }

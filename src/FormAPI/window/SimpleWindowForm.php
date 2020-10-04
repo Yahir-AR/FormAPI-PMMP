@@ -6,8 +6,6 @@ use FormAPI\elements\Button;
 use FormAPI\elements\ButtonImage;
 use FormAPI\Main;
 use pocketmine\Player;
-use pocketmine\scheduler\ClosureTask;
-use pocketmine\scheduler\Task;
 
 class SimpleWindowForm extends WindowForm
 {
@@ -50,6 +48,7 @@ class SimpleWindowForm extends WindowForm
         if(isset($this->elements[$name])) return;
 
         $this->elements[$name] = new Button($name, $text, $this, $image);
+        $this->content["buttons"][] = $this->elements[$name]->getContent();
     }
 
     /**
@@ -71,33 +70,6 @@ class SimpleWindowForm extends WindowForm
         if($this->response === null) return null;
 
         return $this->elements[array_keys($this->elements)[$this->response]];
-    }
-
-    /**
-     * @param Player $player
-     */
-    public function showTo(Player $player): void
-    {
-
-        parent::showTo($player);
-
-        foreach($this->elements as $name => $element) {
-            $button = [
-                "text" => $element->getText()
-            ];
-
-            if($element->getImage() !== null) {
-                $button["image"] = [
-                    "type" => $element->getImage()->getType(),
-                    "data" => $element->getImage()->getLocation()
-                ];
-            }
-
-            $this->content["buttons"][] = $button;
-        }
-
-        $player->sendForm($this);
-
     }
 
 
