@@ -14,10 +14,12 @@ $window->addButton("name", "SkyWars");//without image
 $window->addButton("name1", "BedWars", new ButtonImage("path", "textures/items/bed_blue.png"));//with image
 $window->showTo($player);
 ```
+<img src="https://i.imgur.com/xlEFsmc.jpeg" width="430" height="354"></img>
 
-![alt text](https://i.imgur.com/xlEFsmc.jpeg)
+<br>
 <br>
 For get the response from simple form, this is a event xD
+
 ```php
 use FormAPI\response\PlayerWindowResponse;
 use FormAPI\window\SimpleWindowForm;
