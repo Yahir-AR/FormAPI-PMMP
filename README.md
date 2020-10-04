@@ -40,7 +40,7 @@ $window = new ModalWindowForm("name", "Title", "Description", "Accept", "Cancel"
 $window->showTo($player);
 ```
 
-For get the response from simple form, this is a event xD
+For get the response from modal form, this is a event xD
 ```
 use FormAPI\response\PlayerWindowResponse;
 use FormAPI\window\ModalWindowForm;
