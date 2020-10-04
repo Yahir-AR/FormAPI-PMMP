@@ -4,7 +4,7 @@ namespace FormAPI\window;
 
 use pocketmine\Player;
 
-class ModalWindowResponse extends WindowForm
+class ModalWindowForm extends WindowForm
 {
 
     /** @var String */
