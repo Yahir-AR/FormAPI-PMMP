@@ -17,7 +17,6 @@ $window->showTo($player);
 <img src="https://i.imgur.com/xlEFsmc.jpeg" width="430" height="354"></img>
 
 <br>
-<br>
 For get the response from simple form, this is a event xD
 
 ```php
@@ -40,11 +39,15 @@ For create a modal form
 ```php
 use FormAPI\window\ModalWindowForm;
 
-$window = new ModalWindowForm("name", "Title", "Description", "Accept", "Cancel");
+$window = new ModalWindowForm("name", "A little question", "The plugin is good?", "Yes", "No, sorry");
 $window->showTo($player);
 ```
 
+<img src="https://i.imgur.com/jJMD99j.jpeg" width="430" height="354"></img>
+
+<br>
 For get the response from modal form, this is a event xD
+
 ```php
 use FormAPI\response\PlayerWindowResponse;
 use FormAPI\window\ModalWindowForm;
