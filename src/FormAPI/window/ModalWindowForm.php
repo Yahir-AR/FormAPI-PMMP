@@ -73,12 +73,4 @@ class ModalWindowForm extends WindowForm
         return $this->response;
     }
 
-    /**
-     * @param Player $player
-     */
-    public function showTo(Player $player): void
-    {
-        parent::showTo($player);
-        $player->sendForm($this);
-    }
 }
