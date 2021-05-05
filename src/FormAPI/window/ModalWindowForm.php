@@ -2,7 +2,8 @@
 
 namespace FormAPI\window;
 
-use pocketmine\Player;
+use Closure;
+use pocketmine\player\Player;
 
 class ModalWindowForm extends WindowForm
 {
@@ -16,7 +17,16 @@ class ModalWindowForm extends WindowForm
     /** @var String */
     public $buttonFalse = "";
 
-    public function __construct(String $name, String $title, String $description, String $buttonTrue, String $buttonFalse)
+    /**
+     * ModalWindowForm constructor.
+     * @param String $name
+     * @param String $title
+     * @param String $description
+     * @param String $buttonTrue
+     * @param String $buttonFalse
+     * @param Closure|null $response
+     */
+    public function __construct(String $name, String $title, String $description, String $buttonTrue, String $buttonFalse, Closure $response = null)
     {
         $this->name = $name;
         $this->title = $title;
@@ -31,6 +41,8 @@ class ModalWindowForm extends WindowForm
             "button1" => $this->buttonTrue,
             "button2" => $this->buttonFalse
         ];
+
+        parent::__construct($response);
     }
 
     /**
@@ -71,6 +83,19 @@ class ModalWindowForm extends WindowForm
     public function isAccept(): bool
     {
         return $this->response;
+    }
+
+    /**
+     * @param Player $player
+     * @param mixed $data
+     */
+    public function handleResponse(Player $player, $data): void
+    {
+        parent::handleResponse($player, $data);
+
+        if ($this->callable !== null) {
+            if (!$this->isClosed()) ($this->callable)($player, $this->isAccept());
+        }
     }
 
 }

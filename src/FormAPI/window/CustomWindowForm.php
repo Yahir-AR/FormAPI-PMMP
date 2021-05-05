@@ -2,16 +2,14 @@
 
 namespace FormAPI\window;
 
+use Closure;
 use FormAPI\elements\Dropdown;
-use FormAPI\elements\Element;
 use FormAPI\elements\ElementCustom;
 use FormAPI\elements\Input;
 use FormAPI\elements\Slider;
 use FormAPI\elements\StepSlider;
 use FormAPI\elements\Toggle;
-use FormAPI\Main;
-
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class CustomWindowForm extends WindowForm
 {
@@ -19,7 +17,14 @@ class CustomWindowForm extends WindowForm
     /** @var ElementCustom[] */
     public $elements = [];
 
-    public function __construct(string $name, string $title, string $description = "")
+    /**
+     * CustomWindowForm constructor.
+     * @param string $name
+     * @param string $title
+     * @param string $description
+     * @param Closure|null $response
+     */
+    public function __construct(string $name, string $title, string $description = "", Closure $response = null)
     {
         $this->name = $name;
         $this->title = $title;
@@ -30,7 +35,9 @@ class CustomWindowForm extends WindowForm
             "content" => []
         ];
 
-        $this->addLabel($description);
+        if ($description !== "") $this->addLabel($description);
+
+        parent::__construct($response);
     }
 
     /**
@@ -137,6 +144,19 @@ class CustomWindowForm extends WindowForm
             "type" => "label",
             "text" => $text
         ];
+    }
+
+    /**
+     * @param Player $player
+     * @param mixed $data
+     */
+    public function handleResponse(Player $player, $data): void
+    {
+        parent::handleResponse($player, $data);
+
+        if ($this->callable !== null) {
+            if (!$this->isClosed()) ($this->callable)($player, $this);
+        }
     }
 
 

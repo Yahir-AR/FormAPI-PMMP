@@ -4,8 +4,9 @@ namespace FormAPI\window;
 
 use FormAPI\elements\Button;
 use FormAPI\elements\ButtonImage;
-use FormAPI\Main;
-use pocketmine\Player;
+
+use Closure;
+use pocketmine\player\Player;
 
 class SimpleWindowForm extends WindowForm
 {
@@ -17,8 +18,14 @@ class SimpleWindowForm extends WindowForm
     /** @var Button[] */
     public $elements = [];
 
-
-    public function __construct(String $name, String $title, String $description = "")
+    /**
+     * SimpleWindowForm constructor.
+     * @param String $name
+     * @param String $title
+     * @param string $description
+     * @param Closure|null $response
+     */
+    public function __construct(String $name, String $title, String $description = "", Closure $response = null)
     {
         $this->name = $name;
         $this->title = $title;
@@ -30,11 +37,14 @@ class SimpleWindowForm extends WindowForm
             "content" => $this->description,
             "buttons" => []
         ];
+
+        parent::__construct($response);
     }
 
     /**
      * @param String $name
      * @param String $text
+     * @param ButtonImage|null $image
      */
     public function addButton(String $name, String $text, ButtonImage $image = null): void
     {
@@ -63,6 +73,19 @@ class SimpleWindowForm extends WindowForm
         if($this->response === null) return null;
 
         return $this->elements[array_keys($this->elements)[$this->response]];
+    }
+
+    /**
+     * @param Player $player
+     * @param mixed $data
+     */
+    public function handleResponse(Player $player, $data): void
+    {
+        parent::handleResponse($player, $data);
+
+        if ($this->callable !== null) {
+            if ($this->getClickedButton() !== null) ($this->callable)($player, $this->getClickedButton());
+        }
     }
 
 

@@ -2,9 +2,10 @@
 
 namespace FormAPI\window;
 
+use Closure;
 use FormAPI\response\PlayerWindowResponse;
 use pocketmine\form\Form;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 abstract class WindowForm implements Form
 {
@@ -21,7 +22,18 @@ abstract class WindowForm implements Form
     /** @var array */
     public $viewers = [];
 
+    public $callable = null;
+
     public $response;
+
+    /**
+     * WindowForm constructor.
+     * @param Closure|null $response
+     */
+    public function __construct(Closure $response = null)
+    {
+        if ($response !== null) $this->onResponse($response);
+    }
 
     /**
      * @param Player $player
@@ -74,6 +86,17 @@ abstract class WindowForm implements Form
     public function getResponse()
     {
         return $this->response;
+    }
+
+    /**
+     * @param Closure $closure
+     * @return $this
+     */
+    public function onResponse(Closure $closure): self
+    {
+        $this->callable = $closure;
+
+        return $this;
     }
 
     /**

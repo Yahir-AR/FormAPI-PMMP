@@ -2,10 +2,9 @@
 
 namespace FormAPI\response;
 
-use FormAPI\window\CustomWindowForm;
 use FormAPI\window\WindowForm;
 use pocketmine\event\player\PlayerEvent;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class PlayerWindowResponse extends PlayerEvent
 {
