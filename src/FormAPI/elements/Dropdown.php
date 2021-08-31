@@ -4,18 +4,25 @@ namespace FormAPI\elements;
 
 use FormAPI\window\WindowForm;
 
-class Dropdown extends ElementCustom
-{
+class Dropdown extends ElementCustom {
 
     /** @var array */
-    private $options = [];
+    private $options;
 
     /** @var int */
-    private $default = 0;
+    private $default;
 
-    public function __construct(WindowForm $form, String $name, String $text, array $options, int $default = 0)
-    {
+    /**
+     * Dropdown constructor.
+     * @param WindowForm $form
+     * @param String $name
+     * @param String $text
+     * @param array $options
+     * @param int $default
+     */
+    public function __construct(WindowForm $form, String $name, String $text, array $options, int $default = 0) {
         parent::__construct($form, $name, $text);
+
         $this->options = $options;
         $this->default = $default;
 
@@ -27,25 +34,18 @@ class Dropdown extends ElementCustom
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function getOptions(): array
-    {
+    /*** @return array */
+    public function getOptions(): array {
         return $this->options;
     }
 
-    /**
-     * @return int
-     */
-    public function getDefault(): int
-    {
+    /*** @return int */
+    public function getDefault(): int {
         return $this->default;
     }
 
-    public function getFinalValue()
-    {
+    /*** @return mixed */
+    public function getFinalValue() {
         return $this->options[parent::getFinalValue()];
     }
-
 }
