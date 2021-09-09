@@ -4,19 +4,25 @@ namespace FormAPI\elements;
 
 use FormAPI\window\WindowForm;
 
-class Input extends ElementCustom
-{
+class Input extends ElementCustom {
 
     /** @var String */
-    private $placeholder = "";
+    private $placeholder;
 
     /** @var String */
-    private $value = "";
+    private $value;
 
-
-    public function __construct(WindowForm $form, String $name, String $text, String $placeholder = "", String $value = "")
-    {
+    /**
+     * Input constructor.
+     * @param WindowForm $form
+     * @param String $name
+     * @param String $text
+     * @param string $placeholder
+     * @param string $value
+     */
+    public function __construct(WindowForm $form, String $name, String $text, String $placeholder = "", String $value = "") {
         parent::__construct($form, $name, $text);
+
         $this->placeholder = $placeholder;
         $this->value = $value;
 
@@ -28,20 +34,13 @@ class Input extends ElementCustom
         ];
     }
 
-    /**
-     * @return String
-     */
-    public function getPlaceholder(): string
-    {
+    /*** @return String */
+    public function getPlaceholder(): string {
         return $this->placeholder;
     }
 
-    /**
-     * @return String
-     */
-    public function getValue(): string
-    {
+    /*** @return String */
+    public function getValue(): string {
         return $this->value;
     }
-
 }
